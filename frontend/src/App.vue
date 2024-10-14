@@ -1,24 +1,31 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import Navbar from "./components/Navbar.vue";
+import Footer from "./components/Footer.vue";
+</script>
 
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+  <div id="app">
+    <Navbar />
+    <router-view />
+    <Footer />
   </div>
-  <router-view />
 </template>
 
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+<style>
+/* Globale Stile */
+body {
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+  color: #333;
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+
+/* Responsivität */
+@media (max-width: 768px) {
+  /* Mobile Styles */
 }
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
+
+/* Kombinierter Selektor */
+.navbar .nav-links li a:hover {
+  color: #ff6600;
 }
 </style>

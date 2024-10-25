@@ -34,4 +34,19 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
   });
+
+  // Scroll-Effekte für Timeline
+  const timelineItems = document.querySelectorAll(".timeline-item");
+
+  const onScroll = () => {
+    timelineItems.forEach((item) => {
+      const rect = item.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom > 0) {
+        item.classList.add("visible");
+      }
+    });
+  };
+
+  window.addEventListener("scroll", onScroll);
+  onScroll(); // Initiale Prüfung, ob einige Elemente bereits im Viewport sind
 });

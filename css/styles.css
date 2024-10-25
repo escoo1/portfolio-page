@@ -1,0 +1,153 @@
+/* Farbpalette */
+:root {
+  --primary-color: #2a9d8f; /* Grünton für Header und Akzente */
+  --secondary-color: #264653; /* Dunkelblauer Farbton für Navigation */
+  --accent-color: #e76f51; /* Koralle für Schaltflächen und Highlights */
+  --background-color: #f4f4f4; /* Heller Hintergrundton */
+  --text-color: #333; /* Dunkler Text */
+}
+
+/* Allgemeine Stile */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Arial", sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  line-height: 1.6;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Header und Navigation */
+header {
+  background-color: var(--secondary-color);
+  color: #fff;
+  padding: 2vw 0;
+  text-align: center;
+}
+
+header nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+header nav ul li {
+  margin: 0 2vw;
+}
+
+header nav ul li a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.2rem;
+}
+
+header nav ul li a:hover {
+  text-decoration: underline;
+}
+
+/* Responsives Layout */
+@media (max-width: 768px) {
+  header nav ul {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+/* Sektionen */
+section {
+  padding: 5vw 10%;
+  background: var(--background-color);
+}
+
+#home {
+  text-align: center;
+  background: var(--primary-color);
+  color: #fff;
+  padding: 10vw 5vw;
+}
+
+#about,
+#projects,
+#contact {
+  background: #fff;
+  margin: 5vw 0;
+  padding: 5vw;
+  border-radius: 8px;
+}
+
+/* Bild im Home-Bereich */
+#home img {
+  width: 20vw;
+  height: auto;
+  border-radius: 50%;
+  margin-top: 3vw;
+}
+
+/* Kontaktformular */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5vw;
+}
+
+form label {
+  font-weight: bold;
+}
+
+form input,
+form textarea {
+  padding: 1.5vw;
+  border: 1px solid var(--secondary-color);
+  border-radius: 4px;
+  width: 100%;
+  font-size: 1rem;
+}
+
+form button {
+  padding: 1.5vw;
+  background: var(--accent-color);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+form button:hover {
+  background: #d9534f;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 2vw;
+  background-color: var(--secondary-color);
+  color: #fff;
+}
+
+/* Media Queries für kleinere Bildschirme */
+@media (max-width: 768px) {
+  #home img {
+    width: 40vw;
+  }
+
+  section {
+    padding: 10vw 5vw;
+  }
+
+  form input,
+  form textarea {
+    padding: 2.5vw;
+  }
+
+  form button {
+    padding: 3vw;
+  }
+}

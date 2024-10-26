@@ -5,6 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="css/styles.css" />
     <title>Oliver Escobar Rüsch - Portfolio</title>
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+    <script>
+      (function () {
+        emailjs.init("nfYQbnLvBS4XTSC1p");
+      })();
+    </script>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   </head>
   <body>
     <!-- Header -->
@@ -98,6 +105,15 @@
           </div>
         </div>
       </section>
+    </section>
+
+    <!-- Location Section -->
+    <section id="location">
+      <h2>Find My Location</h2>
+      <button id="find-location" class="btn-location">
+        Show My Location on Map
+      </button>
+      <div id="map" class="map-container"></div>
     </section>
 
     <!-- Projects Section -->

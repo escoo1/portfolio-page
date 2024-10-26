@@ -218,3 +218,49 @@ footer {
     padding: 5vw 0;
   }
 }
+
+/* Styling für Location Section */
+#location {
+  padding: 5vw 10%;
+  text-align: center;
+}
+
+/* Styling für den Button */
+.btn-location {
+  padding: 1vw 2vw;
+  font-size: 1rem;
+  background-color: var(--primary-color);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-location:hover {
+  background-color: var(--secondary-color);
+}
+
+/* Styling für die Karte */
+.map-container {
+  height: 400px;
+  width: 100%;
+  margin-top: 20px;
+  border: 2px solid var(--secondary-color);
+  border-radius: 8px;
+  position: relative; /* Sicherstellen, dass die Karte korrekt positioniert ist */
+  overflow: hidden; /* Überlauf verhindern */
+  min-height: 400px; /* Stellt sicher, dass die Mindesthöhe immer vorhanden ist */
+}
+
+/* Responsives Design */
+@media (max-width: 768px) {
+  .map-container {
+    height: 300px;
+  }
+
+  .btn-location {
+    padding: 2vw 4vw;
+    font-size: 1.2rem;
+  }
+}

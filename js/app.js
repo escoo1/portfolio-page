@@ -1,4 +1,24 @@
 document.addEventListener("DOMContentLoaded", () => {
+  // Dark Mode Toggle
+  const darkModeToggle = document.getElementById("dark-mode-toggle");
+
+  // Überprüfen, ob der Benutzer bereits eine Dark Mode Präferenz hat
+  if (localStorage.getItem("dark-mode") === "enabled") {
+    document.body.classList.add("dark-mode");
+  }
+
+  // Event Listener für den Toggle Button
+  darkModeToggle.addEventListener("click", () => {
+    document.body.classList.toggle("dark-mode");
+
+    // Dark Mode Einstellung speichern
+    if (document.body.classList.contains("dark-mode")) {
+      localStorage.setItem("dark-mode", "enabled");
+    } else {
+      localStorage.setItem("dark-mode", "disabled");
+    }
+  });
+
   // Formularvalidierung und EmailJS E-Mail senden
   const contactForm = document.getElementById("contact-form");
 
@@ -68,8 +88,23 @@ document.addEventListener("DOMContentLoaded", () => {
   const findLocationButton = document.getElementById("find-location");
   const mapContainer = document.getElementById("map");
 
-  let userLocationMap; // Variable für die Leaflet Map
+  // Initialisiere Leaflet Karte - einmalig
+  let userLocationMap = L.map("map", {
+    center: [46.9479739, 7.4474468], // Startposition auf Bern
+    zoom: 13,
+    maxZoom: 18,
+  });
 
+  // Füge die Kartenkachel von OpenStreetMap hinzu - einmalig
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    attribution:
+      '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+  }).addTo(userLocationMap);
+
+  // Variable für den Marker (damit wir sie später entfernen können)
+  let userMarker = null;
+
+  // Event Listener für den Button
   findLocationButton.addEventListener("click", () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(showPosition, showError);
@@ -78,64 +113,39 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  // Funktion zur Anzeige der Position
   function showPosition(position) {
     const latitude = position.coords.latitude;
     const longitude = position.coords.longitude;
 
-    // Zerstören der bestehenden Karte, falls vorhanden
-    if (userLocationMap) {
-      userLocationMap.off(); // Entferne alle Event-Listener
-      userLocationMap.remove(); // Entferne die Karte aus dem DOM
+    // Setze die Ansicht auf die aktuelle Position
+    userLocationMap.setView([latitude, longitude], 13);
+
+    // Entferne den alten Marker, falls vorhanden
+    if (userMarker) {
+      userLocationMap.removeLayer(userMarker);
     }
 
-    // Initialisiere die Leaflet-Karte erneut
-    userLocationMap = L.map("map", {
-      center: [latitude, longitude],
-      zoom: 13,
-      maxZoom: 18,
-    });
-
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      attribution:
-        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-    }).addTo(userLocationMap);
-
-    // Füge einen Marker hinzu
-    L.marker([latitude, longitude])
+    // Füge oder aktualisiere den Marker
+    userMarker = L.marker([latitude, longitude])
       .addTo(userLocationMap)
       .bindPopup("You are here!")
       .openPopup();
 
-    // Dynamisches Neurendern der Kartengröße sicherstellen
-    userLocationMap.whenReady(() => {
+    // Vergewissere dich, dass die Kartengröße richtig dargestellt wird
+    setTimeout(() => {
       userLocationMap.invalidateSize();
-    });
+    }, 200);
   }
 
+  // Fehlerbehandlung für Geolocation
   function showError(error) {
-    switch (error.code) {
-      case error.PERMISSION_DENIED:
-        alert("User denied the request for Geolocation.");
-        break;
-      case error.POSITION_UNAVAILABLE:
-        alert("Location information is unavailable.");
-        break;
-      case error.TIMEOUT:
-        alert("The request to get user location timed out.");
-        break;
-      case error.UNKNOWN_ERROR:
-        alert("An unknown error occurred.");
-        break;
-    }
+    const errorMessages = {
+      [error.PERMISSION_DENIED]: "User denied the request for Geolocation.",
+      [error.POSITION_UNAVAILABLE]: "Location information is unavailable.",
+      [error.TIMEOUT]: "The request to get user location timed out.",
+      [error.UNKNOWN_ERROR]: "An unknown error occurred.",
+    };
+    alert(errorMessages[error.code] || "An unknown error occurred.");
   }
-
-  // Setze die Standard-Icons von Leaflet manuell
-  delete L.Icon.Default.prototype._getIconUrl;
-
-  L.Icon.Default.mergeOptions({
-    iconRetinaUrl:
-      "https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon-2x.png",
-    iconUrl: "https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png",
-    shadowUrl: "https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png",
-  });
 });

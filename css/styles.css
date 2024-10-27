@@ -1,12 +1,22 @@
 /* Farbpalette */
 :root {
-  --primary-color: #2a9d8f; /* Grünton für Header und Akzente */
-  --secondary-color: #264653; /* Dunkelblauer Farbton für Navigation */
-  --accent-color: #e76f51; /* Koralle für Schaltflächen und Highlights */
-  --background-color: #f4f4f4; /* Heller Hintergrundton */
-  --text-color: #333; /* Dunkler Text */
+  --primary-color: #2a9d8f; /* Grünton für Light Mode */
+  --secondary-color: #264653; /* Dunkelblauer Farbton für Light Mode */
+  --accent-color: #e76f51; /* Koralle für Buttons und Highlights */
+  --background-color: #f4f4f4; /* Hintergrundfarbe Light Mode */
+  --text-color: #333; /* Textfarbe Light Mode */
+  --header-text-color: #fff; /* Textfarbe für den Header in Light Mode */
 }
 
+/* Dark Mode Farbpalette */
+body.dark-mode {
+  --primary-color: #1e1e1e; /* Dunkles Grau für Header und Akzente */
+  --secondary-color: #121212; /* Fast schwarzer Farbton für Navigation */
+  --accent-color: #ff8c00; /* Leuchtender Akzent für Buttons */
+  --background-color: #121212; /* Sehr dunkler Hintergrund */
+  --text-color: #f1f1f1; /* Heller Text */
+  --header-text-color: #f1f1f1; /* Helle Textfarbe für den Header im Dark Mode */
+}
 /* Allgemeine Stile */
 * {
   margin: 0;
@@ -26,7 +36,7 @@ body {
 /* Header und Navigation */
 header {
   background-color: var(--secondary-color);
-  color: #fff;
+  color: var(--header-text-color);
   padding: 2vw 0;
   text-align: center;
 }
@@ -43,11 +53,10 @@ header nav ul li {
 }
 
 header nav ul li a {
-  color: #fff;
+  color: var(--header-text-color);
   text-decoration: none;
   font-size: 1.2rem;
 }
-
 header nav ul li a:hover {
   text-decoration: underline;
 }
@@ -69,14 +78,15 @@ section {
 #home {
   text-align: center;
   background: var(--primary-color);
-  color: #fff;
+  color: var(--text-color);
   padding: 10vw 5vw;
 }
 
 #about,
+#location,
 #projects,
 #contact {
-  background: #fff;
+  background: var(--background-color);
   margin: 5vw 0;
   padding: 5vw;
   border-radius: 8px;
@@ -108,6 +118,8 @@ form textarea {
   border-radius: 4px;
   width: 100%;
   font-size: 1rem;
+  background: var(--background-color);
+  color: var(--text-color);
 }
 
 form button {
@@ -121,7 +133,28 @@ form button {
 }
 
 form button:hover {
-  background: #d9534f;
+  background: var(--primary-color);
+}
+
+/* Dark Mode Styles für das Kontaktformular */
+body.dark-mode form input,
+body.dark-mode form textarea {
+  background-color: #333; /* Dunklerer Hintergrund für Eingabefelder im Dark Mode */
+  color: #f1f1f1; /* Heller Text für Eingaben im Dark Mode */
+  border: 1px solid #555; /* Angepasste Rahmenfarbe im Dark Mode */
+}
+
+body.dark-mode form label {
+  color: #f1f1f1; /* Heller Text für Labels im Dark Mode */
+}
+
+body.dark-mode form button {
+  background: #ff8c00; /* Orange für den Button im Dark Mode */
+  color: #fff; /* Weißer Text */
+}
+
+body.dark-mode form button:hover {
+  background: #e67300; /* Etwas dunklerer Orange-Farbton für den Hover-Zustand im Dark Mode */
 }
 
 /* Footer */
@@ -129,7 +162,7 @@ footer {
   text-align: center;
   padding: 2vw;
   background-color: var(--secondary-color);
-  color: #fff;
+  color: var(--header-text-color);
 }
 
 /* Media Queries für kleinere Bildschirme */
@@ -155,7 +188,7 @@ footer {
 /* Timeline Styles */
 #timeline {
   padding: 5vw 10%;
-  background: #fff;
+  background: var(--background-color);
 }
 
 .timeline {
@@ -185,7 +218,8 @@ footer {
 }
 
 .timeline-content {
-  background: var(--background-color);
+  background: var(--header-text-color);
+  color: var(--text-color);
   padding: 2vw;
   border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -219,6 +253,22 @@ footer {
   }
 }
 
+/* Dark Mode Timeline Styles */
+body.dark-mode .timeline-content {
+  background: #333; /* Eine hellere Farbe im Vergleich zum Hintergrund, um mehr Kontrast zu haben */
+  color: var(
+    --text-color
+  ); /* Die Textfarbe bleibt wie im Dark Mode definiert */
+  box-shadow: 0 2px 5px rgba(255, 255, 255, 0.1); /* Leichter Schatten für bessere Erkennbarkeit */
+}
+
+/* Dark Mode Timeline Punkt */
+body.dark-mode .timeline-content::before {
+  background: var(
+    --accent-color
+  ); /* Ändere die Farbe im Dark Mode auf den Akzentfarbton */
+}
+
 /* Styling für Location Section */
 #location {
   padding: 5vw 10%;
@@ -241,6 +291,17 @@ footer {
   background-color: var(--secondary-color);
 }
 
+/* Dark Mode Styling für den Button */
+body.dark-mode .btn-location {
+  background-color: var(
+    --accent-color
+  ); /* Setze die Hintergrundfarbe auf den Akzent (orange) */
+}
+
+body.dark-mode .btn-location:hover {
+  background-color: #ff6600; /* Optional: helleres Orange beim Hover im Dark Mode */
+}
+
 /* Styling für die Karte */
 .map-container {
   height: 400px;
@@ -253,6 +314,23 @@ footer {
   min-height: 400px; /* Stellt sicher, dass die Mindesthöhe immer vorhanden ist */
 }
 
+/* Button für Dark Mode */
+.dark-mode-btn {
+  background: none;
+  border: 2px solid var(--text-color);
+  color: var(--header-text-color);
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  border-radius: 8px;
+  margin-top: 10px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dark-mode-btn:hover {
+  background: var(--accent-color);
+  color: #fff;
+}
+
 /* Responsives Design */
 @media (max-width: 768px) {
   .map-container {
@@ -262,5 +340,10 @@ footer {
   .btn-location {
     padding: 2vw 4vw;
     font-size: 1.2rem;
+  }
+
+  .dark-mode-btn {
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
   }
 }

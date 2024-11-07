@@ -148,4 +148,46 @@ document.addEventListener("DOMContentLoaded", () => {
     };
     alert(errorMessages[error.code] || "An unknown error occurred.");
   }
+
+  // Cataas API - Interaktive Cat Button Funktionen
+  const catButtons = document.querySelectorAll(".cat-button");
+  const catImage = document.getElementById("cat-image");
+
+  if (catButtons.length > 0 && catImage) {
+    catButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const mood = button.getAttribute("data-mood");
+        fetchCatImage(mood);
+      });
+    });
+  }
+
+  function fetchCatImage(mood) {
+    // API-Aufruf zur Cataas API
+    fetch(`https://cataas.com/cat/${mood}?json=true`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        if (data && data._id) {
+          // Verwende die ID, um die URL manuell zu konstruieren
+          const catImageUrl = `https://cataas.com/cat/${data._id}`;
+          console.log("Fetched Cat Image URL: ", catImageUrl); // Debugging Ausgabe
+          catImage.src = catImageUrl;
+          catImage.alt = `A ${mood} cat`;
+        } else {
+          console.error("Error: Received data does not have a valid ID.", data);
+          alert("Received an unexpected response from the cat API.");
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching the cat image:", error);
+        alert(
+          "Something went wrong while fetching the cat image. Please try again."
+        );
+      });
+  }
 });

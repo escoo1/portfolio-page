@@ -269,6 +269,44 @@ body.dark-mode .timeline-content::before {
   ); /* Ändere die Farbe im Dark Mode auf den Akzentfarbton */
 }
 
+/* Styling for Cat Mood Selector Section */
+#projects {
+  padding: 5vw 10%;
+  background: var(--background-color);
+  text-align: center;
+}
+
+.cat-buttons {
+  margin: 2vw 0;
+}
+
+.cat-button {
+  padding: 1vw 2vw;
+  font-size: 1rem;
+  background-color: var(--accent-color);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin: 0.5vw;
+  transition: background-color 0.3s ease;
+}
+
+.cat-button:hover {
+  background-color: var(--primary-color);
+}
+
+.cat-image-container {
+  margin-top: 2vw;
+}
+
+#cat-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
 /* Styling für Location Section */
 #location {
   padding: 5vw 10%;

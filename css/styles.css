@@ -84,7 +84,7 @@ section {
 
 #about,
 #location,
-#projects,
+#cataas,
 #contact {
   background: var(--background-color);
   margin: 5vw 0;
@@ -270,7 +270,7 @@ body.dark-mode .timeline-content::before {
 }
 
 /* Styling for Cat Mood Selector Section */
-#projects {
+#cataas {
   padding: 5vw 10%;
   background: var(--background-color);
   text-align: center;

@@ -9,14 +9,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Event Listener für den Toggle Button
   darkModeToggle.addEventListener("click", () => {
-    document.body.classList.toggle("dark-mode");
-
-    // Dark Mode Einstellung speichern
-    if (document.body.classList.contains("dark-mode")) {
-      localStorage.setItem("dark-mode", "enabled");
-    } else {
-      localStorage.setItem("dark-mode", "disabled");
-    }
+    const isDarkMode = document.body.classList.toggle("dark-mode");
+    localStorage.setItem("dark-mode", isDarkMode ? "enabled" : "disabled");
   });
 
   // Formularvalidierung und EmailJS E-Mail senden
@@ -60,29 +54,31 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Smooth Scroll für Navigationslinks
-  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-    anchor.addEventListener("click", function (e) {
+  document.addEventListener("click", (e) => {
+    if (
+      e.target.tagName === "A" &&
+      e.target.getAttribute("href")?.startsWith("#")
+    ) {
       e.preventDefault();
-      document.querySelector(this.getAttribute("href")).scrollIntoView({
-        behavior: "smooth",
-      });
-    });
+      const target = document.querySelector(e.target.getAttribute("href"));
+      if (target) {
+        target.scrollIntoView({ behavior: "smooth" });
+      }
+    }
   });
 
   // Scroll-Effekte für Timeline
   const timelineItems = document.querySelectorAll(".timeline-item");
 
-  const onScroll = () => {
-    timelineItems.forEach((item) => {
-      const rect = item.getBoundingClientRect();
-      if (rect.top < window.innerHeight && rect.bottom > 0) {
-        item.classList.add("visible");
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
       }
     });
-  };
+  });
 
-  window.addEventListener("scroll", onScroll);
-  onScroll(); // Initiale Prüfung, ob einige Elemente bereits im Viewport sind
+  timelineItems.forEach((item) => observer.observe(item));
 
   // Geolocation und Leaflet.js Map
   const findLocationButton = document.getElementById("find-location");

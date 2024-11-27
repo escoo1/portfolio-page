@@ -17,6 +17,7 @@ body.dark-mode {
   --text-color: #f1f1f1; /* Heller Text */
   --header-text-color: #f1f1f1; /* Helle Textfarbe für den Header im Dark Mode */
 }
+
 /* Allgemeine Stile */
 * {
   margin: 0;
@@ -57,16 +58,9 @@ header nav ul li a {
   text-decoration: none;
   font-size: 1.2rem;
 }
+
 header nav ul li a:hover {
   text-decoration: underline;
-}
-
-/* Responsives Layout */
-@media (max-width: 768px) {
-  header nav ul {
-    flex-direction: column;
-    align-items: center;
-  }
 }
 
 /* Sektionen */
@@ -136,25 +130,25 @@ form button:hover {
   background: var(--primary-color);
 }
 
-/* Dark Mode Styles für das Kontaktformular */
-body.dark-mode form input,
-body.dark-mode form textarea {
-  background-color: #333; /* Dunklerer Hintergrund für Eingabefelder im Dark Mode */
-  color: #f1f1f1; /* Heller Text für Eingaben im Dark Mode */
-  border: 1px solid #555; /* Angepasste Rahmenfarbe im Dark Mode */
+/* Dark Mode-Stile für das Formular */
+body.dark-mode form {
+  color: #f1f1f1; /* Standardtextfarbe im Dark Mode */
 }
 
-body.dark-mode form label {
-  color: #f1f1f1; /* Heller Text für Labels im Dark Mode */
+body.dark-mode form input,
+body.dark-mode form textarea {
+  background-color: #333; /* Dunkler Hintergrund */
+  color: inherit; /* Textfarbe von form erben */
+  border: 1px solid #555; /* Rahmenfarbe */
 }
 
 body.dark-mode form button {
-  background: #ff8c00; /* Orange für den Button im Dark Mode */
+  background: #ff8c00; /* Orange für den Button */
   color: #fff; /* Weißer Text */
 }
 
 body.dark-mode form button:hover {
-  background: #e67300; /* Etwas dunklerer Orange-Farbton für den Hover-Zustand im Dark Mode */
+  background: #e67300; /* Dunklerer Orange-Ton beim Hover */
 }
 
 /* Footer */
@@ -165,27 +159,7 @@ footer {
   color: var(--header-text-color);
 }
 
-/* Media Queries für kleinere Bildschirme */
-@media (max-width: 768px) {
-  #home img {
-    width: 40vw;
-  }
-
-  section {
-    padding: 10vw 5vw;
-  }
-
-  form input,
-  form textarea {
-    padding: 2.5vw;
-  }
-
-  form button {
-    padding: 3vw;
-  }
-}
-
-/* Timeline Styles */
+/* Timeline allgemeine Stile */
 #timeline {
   padding: 5vw 10%;
   background: var(--background-color);
@@ -213,12 +187,12 @@ footer {
 
 .timeline-date {
   font-weight: bold;
-  color: var(--secondary-color);
+  color: var(--secondary-color); /* Standardfarbe für Light Mode */
   margin-bottom: 1vw;
 }
 
 .timeline-content {
-  background: var(--header-text-color);
+  background: var(--header-text-color); /* Heller Hintergrund im Light Mode */
   color: var(--text-color);
   padding: 2vw;
   border-radius: 8px;
@@ -243,30 +217,19 @@ footer {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
-@media (max-width: 768px) {
-  .timeline {
-    padding: 5vw;
-  }
-
-  .timeline-item {
-    padding: 5vw 0;
-  }
+/* Dark Mode-Stile für Timeline */
+body.dark-mode .timeline-date {
+  color: var(--accent-color); /* Helle Farbe für bessere Lesbarkeit */
 }
 
-/* Dark Mode Timeline Styles */
 body.dark-mode .timeline-content {
-  background: #333; /* Eine hellere Farbe im Vergleich zum Hintergrund, um mehr Kontrast zu haben */
-  color: var(
-    --text-color
-  ); /* Die Textfarbe bleibt wie im Dark Mode definiert */
-  box-shadow: 0 2px 5px rgba(255, 255, 255, 0.1); /* Leichter Schatten für bessere Erkennbarkeit */
+  background: #333; /* Kontrastreicher Hintergrund im Dark Mode */
+  color: var(--text-color);
+  box-shadow: 0 2px 5px rgba(255, 255, 255, 0.1);
 }
 
-/* Dark Mode Timeline Punkt */
 body.dark-mode .timeline-content::before {
-  background: var(
-    --accent-color
-  ); /* Ändere die Farbe im Dark Mode auf den Akzentfarbton */
+  background: var(--accent-color); /* Konsistenz mit der Textfarbe */
 }
 
 /* Styling for Cat Mood Selector Section */
@@ -307,13 +270,11 @@ body.dark-mode .timeline-content::before {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-/* Styling für Location Section */
 #location {
   padding: 5vw 10%;
   text-align: center;
 }
 
-/* Styling für den Button */
 .btn-location {
   padding: 1vw 2vw;
   font-size: 1rem;
@@ -329,30 +290,25 @@ body.dark-mode .timeline-content::before {
   background-color: var(--secondary-color);
 }
 
-/* Dark Mode Styling für den Button */
 body.dark-mode .btn-location {
-  background-color: var(
-    --accent-color
-  ); /* Setze die Hintergrundfarbe auf den Akzent (orange) */
+  background-color: var(--accent-color);
 }
 
 body.dark-mode .btn-location:hover {
-  background-color: #ff6600; /* Optional: helleres Orange beim Hover im Dark Mode */
+  background-color: #ff6600;
 }
 
-/* Styling für die Karte */
 .map-container {
   height: 400px;
   width: 100%;
   margin-top: 20px;
   border: 2px solid var(--secondary-color);
   border-radius: 8px;
-  position: relative; /* Sicherstellen, dass die Karte korrekt positioniert ist */
-  overflow: hidden; /* Überlauf verhindern */
-  min-height: 400px; /* Stellt sicher, dass die Mindesthöhe immer vorhanden ist */
+  position: relative;
+  overflow: hidden;
+  min-height: 400px;
 }
 
-/* Button für Dark Mode */
 .dark-mode-btn {
   background: none;
   border: 2px solid var(--text-color);
@@ -369,8 +325,38 @@ body.dark-mode .btn-location:hover {
   color: #fff;
 }
 
-/* Responsives Design */
+/* Media Queries */
 @media (max-width: 768px) {
+  header nav ul {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #home img {
+    width: 40vw;
+  }
+
+  section {
+    padding: 10vw 5vw;
+  }
+
+  form input,
+  form textarea {
+    padding: 2.5vw;
+  }
+
+  form button {
+    padding: 3vw;
+  }
+
+  .timeline {
+    padding: 5vw;
+  }
+
+  .timeline-item {
+    padding: 5vw 0;
+  }
+
   .map-container {
     height: 300px;
   }

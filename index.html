@@ -26,7 +26,7 @@
           <li><a href="#contact">Contact</a></li>
         </ul>
       </nav>
-      <button id="dark-mode-toggle" class="dark-mode-btn">
+      <button id="dark-mode-toggle" class="button dark-mode-btn">
         🌙 Toggle Dark Mode
       </button>
     </header>
@@ -115,9 +115,10 @@
     <!-- Location Section -->
     <section id="location">
       <h2>Find My Location</h2>
-      <button id="find-location" class="btn-location">
+      <button id="find-location" class="button btn-location">
         Show My Location on Map
       </button>
+
       <div id="map" class="map-container"></div>
     </section>
 
@@ -126,10 +127,10 @@
       <h2>Cat Mood Selector</h2>
       <p>Click a button to see a cat with a certain mood!</p>
       <div class="cat-buttons">
-        <button class="cat-button" data-mood="cute">Cute Cat</button>
-        <button class="cat-button" data-mood="funny">Funny Cat</button>
-        <button class="cat-button" data-mood="grumpy">Grumpy Cat</button>
-        <button class="cat-button" data-mood="happy">Happy Cat</button>
+        <button class="button cat-button" data-mood="cute">Cute Cat</button>
+        <button class="button cat-button" data-mood="funny">Funny Cat</button>
+        <button class="button cat-button" data-mood="grumpy">Grumpy Cat</button>
+        <button class="button cat-button" data-mood="happy">Happy Cat</button>
       </div>
       <div class="cat-image-container">
         <img id="cat-image" src="" alt="Click a button to see a cat!" />
@@ -146,7 +147,7 @@
         <input type="email" id="email" name="email" required />
         <label for="message">Message:</label>
         <textarea id="message" name="message" required></textarea>
-        <button type="submit">Send</button>
+        <button type="submit" class="button">Send</button>
       </form>
     </section>
 
